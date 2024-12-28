@@ -78,7 +78,17 @@ export type Token = $Result.DefaultSelection<Prisma.$TokenPayload>
  * Enums
  */
 export namespace $Enums {
-  export const NotificationType: {
+  export const TokenType: {
+  EMAIL_VERIFY: 'EMAIL_VERIFY',
+  PASSWORD_RESET: 'PASSWORD_RESET',
+  DEACTIVATE_ACCOUNT: 'DEACTIVATE_ACCOUNT',
+  TELEGRAM_AUTH: 'TELEGRAM_AUTH'
+};
+
+export type TokenType = (typeof TokenType)[keyof typeof TokenType]
+
+
+export const NotificationType: {
   STREAM_START: 'STREAM_START',
   NEW_FOLLOWER: 'NEW_FOLLOWER',
   NEW_SPONSORSHIP: 'NEW_SPONSORSHIP',
@@ -98,17 +108,11 @@ export const TransactionStatus: {
 
 export type TransactionStatus = (typeof TransactionStatus)[keyof typeof TransactionStatus]
 
-
-export const TokenType: {
-  EMAIL_VERIFY: 'EMAIL_VERIFY',
-  PASSWORD_RESET: 'PASSWORD_RESET',
-  DEACTIVATE_ACCOUNT: 'DEACTIVATE_ACCOUNT',
-  TELEGRAM_AUTH: 'TELEGRAM_AUTH'
-};
-
-export type TokenType = (typeof TokenType)[keyof typeof TokenType]
-
 }
+
+export type TokenType = $Enums.TokenType
+
+export const TokenType: typeof $Enums.TokenType
 
 export type NotificationType = $Enums.NotificationType
 
@@ -117,10 +121,6 @@ export const NotificationType: typeof $Enums.NotificationType
 export type TransactionStatus = $Enums.TransactionStatus
 
 export const TransactionStatus: typeof $Enums.TransactionStatus
-
-export type TokenType = $Enums.TokenType
-
-export const TokenType: typeof $Enums.TokenType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -384,7 +384,6 @@ export namespace Prisma {
   export import PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
   export import PrismaClientInitializationError = runtime.PrismaClientInitializationError
   export import PrismaClientValidationError = runtime.PrismaClientValidationError
-  export import NotFoundError = runtime.NotFoundError
 
   /**
    * Re-export of sql-template-tag
@@ -423,8 +422,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.21.1
-   * Query Engine version: bf0e5e8a04cada8225617067eaa03d041e2bba36
+   * Prisma Client JS version: 6.1.0
+   * Query Engine version: 11f085a2012c0f4778414c8db2651556ee0ef959
    */
   export type PrismaVersion = {
     client: string
@@ -14667,10 +14666,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     tokens?: TokenListRelationFilter
     socialLinks?: SocialLinkListRelationFilter
-    stream?: XOR<StreamNullableRelationFilter, StreamWhereInput> | null
+    stream?: XOR<StreamNullableScalarRelationFilter, StreamWhereInput> | null
     chatMessages?: ChatMessageListRelationFilter
     notifications?: NotificationListRelationFilter
-    notificationSettings?: XOR<NotificationSettingsNullableRelationFilter, NotificationSettingsWhereInput> | null
+    notificationSettings?: XOR<NotificationSettingsNullableScalarRelationFilter, NotificationSettingsWhereInput> | null
     followers?: FollowListRelationFilter
     followings?: FollowListRelationFilter
     transactions?: TransactionListRelationFilter
@@ -14732,10 +14731,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     tokens?: TokenListRelationFilter
     socialLinks?: SocialLinkListRelationFilter
-    stream?: XOR<StreamNullableRelationFilter, StreamWhereInput> | null
+    stream?: XOR<StreamNullableScalarRelationFilter, StreamWhereInput> | null
     chatMessages?: ChatMessageListRelationFilter
     notifications?: NotificationListRelationFilter
-    notificationSettings?: XOR<NotificationSettingsNullableRelationFilter, NotificationSettingsWhereInput> | null
+    notificationSettings?: XOR<NotificationSettingsNullableScalarRelationFilter, NotificationSettingsWhereInput> | null
     followers?: FollowListRelationFilter
     followings?: FollowListRelationFilter
     transactions?: TransactionListRelationFilter
@@ -14799,7 +14798,7 @@ export namespace Prisma {
     userId?: StringNullableFilter<"SocialLink"> | string | null
     createdAt?: DateTimeFilter<"SocialLink"> | Date | string
     updatedAt?: DateTimeFilter<"SocialLink"> | Date | string
-    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type SocialLinkOrderByWithRelationInput = {
@@ -14824,7 +14823,7 @@ export namespace Prisma {
     userId?: StringNullableFilter<"SocialLink"> | string | null
     createdAt?: DateTimeFilter<"SocialLink"> | Date | string
     updatedAt?: DateTimeFilter<"SocialLink"> | Date | string
-    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type SocialLinkOrderByWithAggregationInput = {
@@ -14874,8 +14873,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Stream"> | Date | string
     updatedAt?: DateTimeFilter<"Stream"> | Date | string
     chatMessages?: ChatMessageListRelationFilter
-    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
-    category?: XOR<CategoryNullableRelationFilter, CategoryWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
   }
 
   export type StreamOrderByWithRelationInput = {
@@ -14917,8 +14916,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Stream"> | Date | string
     updatedAt?: DateTimeFilter<"Stream"> | Date | string
     chatMessages?: ChatMessageListRelationFilter
-    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
-    category?: XOR<CategoryNullableRelationFilter, CategoryWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
   }, "id" | "ingressId" | "userId">
 
   export type StreamOrderByWithAggregationInput = {
@@ -14971,8 +14970,8 @@ export namespace Prisma {
     streamId?: StringFilter<"ChatMessage"> | string
     createdAt?: DateTimeFilter<"ChatMessage"> | Date | string
     updatedAt?: DateTimeFilter<"ChatMessage"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
-    stream?: XOR<StreamRelationFilter, StreamWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    stream?: XOR<StreamScalarRelationFilter, StreamWhereInput>
   }
 
   export type ChatMessageOrderByWithRelationInput = {
@@ -14996,8 +14995,8 @@ export namespace Prisma {
     streamId?: StringFilter<"ChatMessage"> | string
     createdAt?: DateTimeFilter<"ChatMessage"> | Date | string
     updatedAt?: DateTimeFilter<"ChatMessage"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
-    stream?: XOR<StreamRelationFilter, StreamWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    stream?: XOR<StreamScalarRelationFilter, StreamWhereInput>
   }, "id">
 
   export type ChatMessageOrderByWithAggregationInput = {
@@ -15098,8 +15097,8 @@ export namespace Prisma {
     followingId?: StringFilter<"Follow"> | string
     createdAt?: DateTimeFilter<"Follow"> | Date | string
     updatedAt?: DateTimeFilter<"Follow"> | Date | string
-    follower?: XOR<UserRelationFilter, UserWhereInput>
-    following?: XOR<UserRelationFilter, UserWhereInput>
+    follower?: XOR<UserScalarRelationFilter, UserWhereInput>
+    following?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type FollowOrderByWithRelationInput = {
@@ -15122,8 +15121,8 @@ export namespace Prisma {
     followingId?: StringFilter<"Follow"> | string
     createdAt?: DateTimeFilter<"Follow"> | Date | string
     updatedAt?: DateTimeFilter<"Follow"> | Date | string
-    follower?: XOR<UserRelationFilter, UserWhereInput>
-    following?: XOR<UserRelationFilter, UserWhereInput>
+    follower?: XOR<UserScalarRelationFilter, UserWhereInput>
+    following?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "followerId_followingId">
 
   export type FollowOrderByWithAggregationInput = {
@@ -15159,7 +15158,7 @@ export namespace Prisma {
     userId?: StringNullableFilter<"Notification"> | string | null
     createdAt?: DateTimeFilter<"Notification"> | Date | string
     updatedAt?: DateTimeFilter<"Notification"> | Date | string
-    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type NotificationOrderByWithRelationInput = {
@@ -15184,7 +15183,7 @@ export namespace Prisma {
     userId?: StringNullableFilter<"Notification"> | string | null
     createdAt?: DateTimeFilter<"Notification"> | Date | string
     updatedAt?: DateTimeFilter<"Notification"> | Date | string
-    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type NotificationOrderByWithAggregationInput = {
@@ -15223,7 +15222,7 @@ export namespace Prisma {
     userId?: StringFilter<"NotificationSettings"> | string
     createdAt?: DateTimeFilter<"NotificationSettings"> | Date | string
     updatedAt?: DateTimeFilter<"NotificationSettings"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type NotificationSettingsOrderByWithRelationInput = {
@@ -15246,7 +15245,7 @@ export namespace Prisma {
     telegramNotifications?: BoolFilter<"NotificationSettings"> | boolean
     createdAt?: DateTimeFilter<"NotificationSettings"> | Date | string
     updatedAt?: DateTimeFilter<"NotificationSettings"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId">
 
   export type NotificationSettingsOrderByWithAggregationInput = {
@@ -15285,7 +15284,7 @@ export namespace Prisma {
     userId?: StringNullableFilter<"Transaction"> | string | null
     createdAt?: DateTimeFilter<"Transaction"> | Date | string
     updatedAt?: DateTimeFilter<"Transaction"> | Date | string
-    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type TransactionOrderByWithRelationInput = {
@@ -15312,7 +15311,7 @@ export namespace Prisma {
     userId?: StringNullableFilter<"Transaction"> | string | null
     createdAt?: DateTimeFilter<"Transaction"> | Date | string
     updatedAt?: DateTimeFilter<"Transaction"> | Date | string
-    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type TransactionOrderByWithAggregationInput = {
@@ -15358,7 +15357,7 @@ export namespace Prisma {
     channelId?: StringNullableFilter<"SponsorshipPlan"> | string | null
     createdAt?: DateTimeFilter<"SponsorshipPlan"> | Date | string
     updatedAt?: DateTimeFilter<"SponsorshipPlan"> | Date | string
-    channel?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    channel?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     sponsorshipSubscriptions?: SponsorshipSubscriptionListRelationFilter
   }
 
@@ -15389,7 +15388,7 @@ export namespace Prisma {
     channelId?: StringNullableFilter<"SponsorshipPlan"> | string | null
     createdAt?: DateTimeFilter<"SponsorshipPlan"> | Date | string
     updatedAt?: DateTimeFilter<"SponsorshipPlan"> | Date | string
-    channel?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    channel?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     sponsorshipSubscriptions?: SponsorshipSubscriptionListRelationFilter
   }, "id">
 
@@ -15436,9 +15435,9 @@ export namespace Prisma {
     channelId?: StringNullableFilter<"SponsorshipSubscription"> | string | null
     createdAt?: DateTimeFilter<"SponsorshipSubscription"> | Date | string
     updatedAt?: DateTimeFilter<"SponsorshipSubscription"> | Date | string
-    plan?: XOR<SponsorshipPlanNullableRelationFilter, SponsorshipPlanWhereInput> | null
-    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
-    channel?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    plan?: XOR<SponsorshipPlanNullableScalarRelationFilter, SponsorshipPlanWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    channel?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type SponsorshipSubscriptionOrderByWithRelationInput = {
@@ -15465,9 +15464,9 @@ export namespace Prisma {
     channelId?: StringNullableFilter<"SponsorshipSubscription"> | string | null
     createdAt?: DateTimeFilter<"SponsorshipSubscription"> | Date | string
     updatedAt?: DateTimeFilter<"SponsorshipSubscription"> | Date | string
-    plan?: XOR<SponsorshipPlanNullableRelationFilter, SponsorshipPlanWhereInput> | null
-    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
-    channel?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    plan?: XOR<SponsorshipPlanNullableScalarRelationFilter, SponsorshipPlanWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    channel?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type SponsorshipSubscriptionOrderByWithAggregationInput = {
@@ -15507,7 +15506,7 @@ export namespace Prisma {
     userId?: StringNullableFilter<"Token"> | string | null
     createdAt?: DateTimeFilter<"Token"> | Date | string
     updatedAt?: DateTimeFilter<"Token"> | Date | string
-    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type TokenOrderByWithRelationInput = {
@@ -15532,7 +15531,7 @@ export namespace Prisma {
     userId?: StringNullableFilter<"Token"> | string | null
     createdAt?: DateTimeFilter<"Token"> | Date | string
     updatedAt?: DateTimeFilter<"Token"> | Date | string
-    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id" | "token">
 
   export type TokenOrderByWithAggregationInput = {
@@ -16620,7 +16619,7 @@ export namespace Prisma {
     none?: SocialLinkWhereInput
   }
 
-  export type StreamNullableRelationFilter = {
+  export type StreamNullableScalarRelationFilter = {
     is?: StreamWhereInput | null
     isNot?: StreamWhereInput | null
   }
@@ -16637,7 +16636,7 @@ export namespace Prisma {
     none?: NotificationWhereInput
   }
 
-  export type NotificationSettingsNullableRelationFilter = {
+  export type NotificationSettingsNullableScalarRelationFilter = {
     is?: NotificationSettingsWhereInput | null
     isNot?: NotificationSettingsWhereInput | null
   }
@@ -16843,7 +16842,7 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type UserNullableRelationFilter = {
+  export type UserNullableScalarRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
   }
@@ -16902,7 +16901,7 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type CategoryNullableRelationFilter = {
+  export type CategoryNullableScalarRelationFilter = {
     is?: CategoryWhereInput | null
     isNot?: CategoryWhereInput | null
   }
@@ -16958,12 +16957,12 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type UserRelationFilter = {
+  export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
   }
 
-  export type StreamRelationFilter = {
+  export type StreamScalarRelationFilter = {
     is?: StreamWhereInput
     isNot?: StreamWhereInput
   }
@@ -17267,7 +17266,7 @@ export namespace Prisma {
     price?: SortOrder
   }
 
-  export type SponsorshipPlanNullableRelationFilter = {
+  export type SponsorshipPlanNullableScalarRelationFilter = {
     is?: SponsorshipPlanWhereInput | null
     isNot?: SponsorshipPlanWhereInput | null
   }
@@ -21643,74 +21642,6 @@ export namespace Prisma {
   }
 
 
-
-  /**
-   * Aliases for legacy arg types
-   */
-    /**
-     * @deprecated Use UserCountOutputTypeDefaultArgs instead
-     */
-    export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use StreamCountOutputTypeDefaultArgs instead
-     */
-    export type StreamCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StreamCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use CategoryCountOutputTypeDefaultArgs instead
-     */
-    export type CategoryCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CategoryCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use SponsorshipPlanCountOutputTypeDefaultArgs instead
-     */
-    export type SponsorshipPlanCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SponsorshipPlanCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use UserDefaultArgs instead
-     */
-    export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use SocialLinkDefaultArgs instead
-     */
-    export type SocialLinkArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SocialLinkDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use StreamDefaultArgs instead
-     */
-    export type StreamArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StreamDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use ChatMessageDefaultArgs instead
-     */
-    export type ChatMessageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ChatMessageDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use CategoryDefaultArgs instead
-     */
-    export type CategoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CategoryDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use FollowDefaultArgs instead
-     */
-    export type FollowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = FollowDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use NotificationDefaultArgs instead
-     */
-    export type NotificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = NotificationDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use NotificationSettingsDefaultArgs instead
-     */
-    export type NotificationSettingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = NotificationSettingsDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use TransactionDefaultArgs instead
-     */
-    export type TransactionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = TransactionDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use SponsorshipPlanDefaultArgs instead
-     */
-    export type SponsorshipPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SponsorshipPlanDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use SponsorshipSubscriptionDefaultArgs instead
-     */
-    export type SponsorshipSubscriptionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SponsorshipSubscriptionDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use TokenDefaultArgs instead
-     */
-    export type TokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = TokenDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

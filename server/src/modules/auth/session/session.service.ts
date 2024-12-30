@@ -112,7 +112,7 @@ export class SessionService {
 			}
 
 			const totp = new TOTP({
-				issuer: 'TeaStream',
+				issuer: 'Streamify',
 				label: `${user.email}`,
 				algorithm: 'SHA1',
 				digits: 6,

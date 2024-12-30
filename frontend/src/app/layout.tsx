@@ -52,7 +52,7 @@ export const metadata: Metadata = {
 		title: SITE_NAME,
 		description: SITE_DESCRIPTION,
 		type: 'website',
-		emails: ['help@teastream.ru'],
+		emails: ['help@streamify.ru'],
 		locale: 'ru_RU',
 		images: [
 			{

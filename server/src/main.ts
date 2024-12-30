@@ -5,7 +5,6 @@ import RedisStore from 'connect-redis'
 import * as cookieParser from 'cookie-parser'
 import * as session from 'express-session'
 import * as graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.js'
-
 import { CoreModule } from './core/core.module'
 import { RedisService } from './core/redis/redis.service'
 import { ms, type StringValue } from './shared/utils/ms.util'
@@ -45,7 +44,8 @@ async function bootstrap() {
 			},
 			store: new RedisStore({
 				client: redis,
-				prefix: config.getOrThrow<string>('SESSION_FOLDER')
+				prefix: config.getOrThrow<string>('SESSION_FOLDER'),
+				ttl: ms(config.getOrThrow<StringValue>('REDIS_TTL'))
 			})
 		})
 	)
@@ -57,5 +57,7 @@ async function bootstrap() {
 	})
 
 	await app.listen(config.getOrThrow<number>('APPLICATION_PORT'))
+
+	console.log(`Application is running on: ${config.getOrThrow<string>('APPLICATION_URL')}`) 
 }
 bootstrap()

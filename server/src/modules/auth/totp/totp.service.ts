@@ -19,7 +19,7 @@ export class TotpService {
 			.substring(0, 24)
 
 		const totp = new TOTP({
-			issuer: 'TeaStream',
+			issuer: 'Streamify',
 			label: `${user.email}`,
 			algorithm: 'SHA1',
 			digits: 6,
@@ -36,7 +36,7 @@ export class TotpService {
 		const { secret, pin } = input
 
 		const totp = new TOTP({
-			issuer: 'TeaStream',
+			issuer: 'Streamify',
 			label: `${user.email}`,
 			algorithm: 'SHA1',
 			digits: 6,

@@ -494,8 +494,8 @@ export type SocialLinkOrderInput = {
 
 export type StreamModel = {
   __typename?: 'StreamModel';
-  category: CategoryModel;
-  categoryId: Scalars['String']['output'];
+  category?: Maybe<CategoryModel>;
+  categoryId?: Maybe<Scalars['String']['output']>;
   chatMessages: Array<ChatMessageModel>;
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
@@ -827,7 +827,7 @@ export type FindCategoryBySlugQueryVariables = Exact<{
 }>;
 
 
-export type FindCategoryBySlugQuery = { __typename?: 'Query', findCategoryBySlug: { __typename?: 'CategoryModel', title: string, thumbnailUrl: string, description?: string | null, streams: Array<{ __typename?: 'StreamModel', title: string, thumbnailUrl?: string | null, isLive: boolean, user: { __typename?: 'UserModel', username: string, avatar?: string | null, isVerified: boolean }, category: { __typename?: 'CategoryModel', title: string, slug: string } }> } };
+export type FindCategoryBySlugQuery = { __typename?: 'Query', findCategoryBySlug: { __typename?: 'CategoryModel', title: string, thumbnailUrl: string, description?: string | null, streams: Array<{ __typename?: 'StreamModel', title: string, thumbnailUrl?: string | null, isLive: boolean, user: { __typename?: 'UserModel', username: string, avatar?: string | null, isVerified: boolean }, category?: { __typename?: 'CategoryModel', title: string, slug: string } | null }> } };
 
 export type FindRandomCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -839,7 +839,7 @@ export type FindChannelByUsernameQueryVariables = Exact<{
 }>;
 
 
-export type FindChannelByUsernameQuery = { __typename?: 'Query', findChannelByUsername: { __typename?: 'UserModel', id: string, username: string, displayName: string, avatar?: string | null, bio?: string | null, isVerified: boolean, socialLinks: Array<{ __typename?: 'SocialLinkModel', title: string, url: string }>, stream: { __typename?: 'StreamModel', id: string, title: string, thumbnailUrl?: string | null, isLive: boolean, isChatEnabled: boolean, isChatFollowersOnly: boolean, isChatPremiumFollowersOnly: boolean, category: { __typename?: 'CategoryModel', id: string, title: string } }, sponsorshipPlans: Array<{ __typename?: 'PlanModel', id: string, title: string, description?: string | null, price: number }>, followings: Array<{ __typename?: 'FollowModel', id: string }> } };
+export type FindChannelByUsernameQuery = { __typename?: 'Query', findChannelByUsername: { __typename?: 'UserModel', id: string, username: string, displayName: string, avatar?: string | null, bio?: string | null, isVerified: boolean, socialLinks: Array<{ __typename?: 'SocialLinkModel', title: string, url: string }>, stream: { __typename?: 'StreamModel', id: string, title: string, thumbnailUrl?: string | null, isLive: boolean, isChatEnabled: boolean, isChatFollowersOnly: boolean, isChatPremiumFollowersOnly: boolean, category?: { __typename?: 'CategoryModel', id: string, title: string } | null }, sponsorshipPlans: Array<{ __typename?: 'PlanModel', id: string, title: string, description?: string | null, price: number }>, followings: Array<{ __typename?: 'FollowModel', id: string }> } };
 
 export type FindRecommendedChannelsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -890,12 +890,12 @@ export type FindAllStreamsQueryVariables = Exact<{
 }>;
 
 
-export type FindAllStreamsQuery = { __typename?: 'Query', findAllStreams: Array<{ __typename?: 'StreamModel', title: string, thumbnailUrl?: string | null, isLive: boolean, user: { __typename?: 'UserModel', username: string, avatar?: string | null, isVerified: boolean }, category: { __typename?: 'CategoryModel', title: string, slug: string } }> };
+export type FindAllStreamsQuery = { __typename?: 'Query', findAllStreams: Array<{ __typename?: 'StreamModel', title: string, thumbnailUrl?: string | null, isLive: boolean, user: { __typename?: 'UserModel', username: string, avatar?: string | null, isVerified: boolean }, category?: { __typename?: 'CategoryModel', title: string, slug: string } | null }> };
 
 export type FindRandomStreamsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FindRandomStreamsQuery = { __typename?: 'Query', findRandomStreams: Array<{ __typename?: 'StreamModel', title: string, thumbnailUrl?: string | null, isLive: boolean, user: { __typename?: 'UserModel', username: string, avatar?: string | null, isVerified: boolean }, category: { __typename?: 'CategoryModel', title: string, slug: string } }> };
+export type FindRandomStreamsQuery = { __typename?: 'Query', findRandomStreams: Array<{ __typename?: 'StreamModel', title: string, thumbnailUrl?: string | null, isLive: boolean, user: { __typename?: 'UserModel', username: string, avatar?: string | null, isVerified: boolean }, category?: { __typename?: 'CategoryModel', title: string, slug: string } | null }> };
 
 export type FindCurrentSessionQueryVariables = Exact<{ [key: string]: never; }>;
 

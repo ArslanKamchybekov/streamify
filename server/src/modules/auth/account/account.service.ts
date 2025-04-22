@@ -4,12 +4,9 @@ import {
 	UnauthorizedException
 } from '@nestjs/common'
 import { hash, verify } from 'argon2'
-
 import type { User } from '@/prisma/generated'
 import { PrismaService } from '@/src/core/prisma/prisma.service'
-
 import { VerificationService } from '../verification/verification.service'
-
 import { ChangeEmailInput } from './inputs/change-email.input'
 import { ChangePasswordInput } from './inputs/change-password.input'
 import { CreateUserInput } from './inputs/create-user.input'

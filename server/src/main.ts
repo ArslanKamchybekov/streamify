@@ -4,11 +4,11 @@ import { NestFactory } from '@nestjs/core'
 import RedisStore from 'connect-redis'
 import * as cookieParser from 'cookie-parser'
 import * as session from 'express-session'
-import * as graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.js'
 import { CoreModule } from './core/core.module'
 import { RedisService } from './core/redis/redis.service'
 import { ms, type StringValue } from './shared/utils/ms.util'
 import { parseBoolean } from './shared/utils/parse-boolean.util'
+import * as graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.js'
 
 async function bootstrap() {
 	const app = await NestFactory.create(CoreModule, { rawBody: true })
@@ -45,7 +45,7 @@ async function bootstrap() {
 			store: new RedisStore({
 				client: redis,
 				prefix: config.getOrThrow<string>('SESSION_FOLDER'),
-				ttl: ms(config.getOrThrow<StringValue>('REDIS_TTL'))
+				ttl: ms(config.getOrThrow<StringValue>('REDIS_TTL')) / 1000
 			})
 		})
 	)

@@ -2,7 +2,6 @@ import { ApolloDriver } from '@nestjs/apollo'
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
-
 import { AccountModule } from '../modules/auth/account/account.module'
 import { DeactivateModule } from '../modules/auth/deactivate/deactivate.module'
 import { PasswordRecoveryModule } from '../modules/auth/password-recovery/password-recovery.module'

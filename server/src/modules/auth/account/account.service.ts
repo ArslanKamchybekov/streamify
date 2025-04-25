@@ -18,6 +18,11 @@ export class AccountService {
 		private readonly verificationService: VerificationService
 	) {}
 
+	public async findAll() {
+		const users = await this.prismaService.user.findMany()
+		return users
+	}
+
 	public async me(id: string) {
 		const user = await this.prismaService.user.findUnique({
 			where: {

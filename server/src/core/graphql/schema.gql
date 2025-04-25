@@ -228,6 +228,7 @@ type PlanModel {
 type Query {
   findAllCategories: [CategoryModel!]!
   findAllStreams(filters: FiltersInput!): [StreamModel!]!
+  findAllUsers: [UserModel!]!
   findCategoryBySlug(slug: String!): CategoryModel!
   findChannelByUsername(username: String!): UserModel!
   findChatMessagesByStream(streamId: String!): [ChatMessageModel!]!

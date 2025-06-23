@@ -20,7 +20,7 @@ export function DeactivateTemplate({ token, metadata }: DeactivateTemplateProps)
 							Запрос на деактивацию аккаунта
 						</Heading>
 						<Text className="text-black text-base mt-2">
-							Вы инициировали процесс деактивации вашего аккаунта на платформе <b>TeaStream</b>.
+							Вы инициировали процесс деактивации вашего аккаунта на платформе <b>Streamify</b>.
 						</Text>
 					</Section>
 
@@ -57,10 +57,10 @@ export function DeactivateTemplate({ token, metadata }: DeactivateTemplateProps)
 						<Text className='text-gray-600'>
 							Если у вас есть вопросы или вы столкнулись с трудностями, не стесняйтесь обращаться в нашу службу поддержки по адресу{' '}
 							<Link 
-								href="mailto:help@teastream.ru" 
+								href="mailto:help@streamify.com"
 								className="text-[#18b9ae] underline"
 							>
-								help@teastream.ru
+								help@streamify.com
 							</Link>.
 						</Text>
 					</Section>

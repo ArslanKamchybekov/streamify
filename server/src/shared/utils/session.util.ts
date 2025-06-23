@@ -42,7 +42,6 @@ export function destroySession(req: Request, configService: ConfigService) {
 			req.res.clearCookie(
 				configService.getOrThrow<string>('SESSION_NAME')
 			)
-
 			resolve(true)
 		})
 	})

@@ -42,7 +42,7 @@ export function EnableTwoFactorTemplate({ domain }: EnableTwoFactorTemplateProps
 						</Text>
 						<Link
 							href={settingsLink}
-							className="inline-flex justify-center items-center rounded-md text-sm font-medium text-white bg-[#18B9AE] px-5 py-2 rounded-full"
+							className="inline-flex justify-center items-center text-sm font-medium text-white bg-[#18B9AE] px-5 py-2 rounded-full"
 						>
 							Перейти в настройки аккаунта
 						</Link>
@@ -52,10 +52,10 @@ export function EnableTwoFactorTemplate({ domain }: EnableTwoFactorTemplateProps
 						<Text className="text-gray-600">
 							Если у вас возникли вопросы, обращайтесь в службу поддержки по адресу{' '}
 							<Link
-								href="mailto:help@teastream.ru"
+								href="mailto:help@streamify.com"
 								className="text-[#18b9ae] underline"
 							>
-								help@teastream.ru
+								help@streamify.com
 							</Link>.
 						</Text>
 					</Section>

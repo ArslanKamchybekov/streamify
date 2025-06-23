@@ -55,10 +55,10 @@ export function PasswordRecoveryTemplate({ domain, token, metadata }: PasswordRe
 						<Text className='text-gray-600'>
 							Если у вас есть вопросы или вы столкнулись с трудностями, не стесняйтесь обращаться в нашу службу поддержки по адресу{' '}
 							<Link 
-								href="mailto:help@teastream.ru" 
+								href="mailto:help@streamify.com"
 								className="text-[#18b9ae] underline"
 							>
-								help@teastream.ru
+								help@streamify.com
 							</Link>.
 						</Text>
 					</Section>
